@@ -45,9 +45,5 @@ if __name__ == '__main__':
     
     json_file = 'data/fake_data.json'
 
-    with open(json_file, 'r') as d:
-        for line in d:
-            result = decrease_dict_levels(json.loads(line))
-
-    test = convert_json2multidf(json_file)
-    print test['opening_hours']
+    example_dataframe = convert_json2multidf(json_file)
+    print (example_dataframe)
