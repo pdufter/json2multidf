@@ -2,7 +2,7 @@ import json
 import pandas
 
 
-def decrease_dict_levels(nested_dict):
+def decreaseDictLevels(nested_dict):
     # returns flattened dict with tuples as keys
     resulting_dict = {}
     list_of_levels = [[nested_dict.items()]]
@@ -25,18 +25,18 @@ def decrease_dict_levels(nested_dict):
     return resulting_dict
 
 
-def convert_json2multidf(path_to_json, create_multiindex=True):
+def json2multidf(path_to_json, create_multiindex=True):
     # inputs json data, flattens it and returns multiindex dataframe
     with open(path_to_json, 'r') as json_data:
-        result = pandas.DataFrame(decrease_dict_levels(json.loads(line)) for line in  json_data)
+        result = pandas.DataFrame(decreaseDictLevels(json.loads(line)) for line in  json_data)
     if create_multiindex is True:
-        current_index = standardise_tuple_length(list(result.columns))
+        current_index = standardiseTupleLength(list(result.columns))
         multiindex = pandas.MultiIndex.from_tuples(current_index)
         result.columns = multiindex
     return result
 
 
-def standardise_tuple_length(list_of_tuples):
+def standardiseTupleLength(list_of_tuples):
     # multiindex is required to be homogenous, thus standardise the tuple length
     max_length = max([len(item) for item in list_of_tuples])
     standardised_tuples = [item + tuple([''] * (max_length - len(item))) for item in list_of_tuples]
@@ -47,5 +47,5 @@ if __name__ == '__main__':
     
     json_file = 'data/fake_data.json'
 
-    example_dataframe = convert_json2multidf(json_file)
+    example_dataframe = json2multidf(json_file)
     print (example_dataframe)
