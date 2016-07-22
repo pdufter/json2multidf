@@ -7,11 +7,16 @@ def decrease_levels(nested_dict):
     list_of_levels = [[nested_dict.items()]]
 
     for level in list_of_levels:
-        new_level = []
+        new_level = list()
         for subdict in level:
             for key, value in subdict:
-                print key
-    
+                if isinstance(value, dict):
+                    new_level.append(value.items())
+                else:
+                    print key
+        
+        if new_level != list():
+            list_of_levels.append(new_level)
     return None
 
 
