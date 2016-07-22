@@ -28,7 +28,17 @@ def decrease_dict_levels(nested_dict):
 def convert_json2multidf(path_to_json, create_multiindex=True):
     with open(path_to_json, 'r') as json_data:
         result = pandas.DataFrame(decrease_dict_levels(json.loads(line)) for line in  json_data)
+    if create_multiindex is True:
+        current_index = standardise_tuple_length(list(result.columns))
+        multiindex = pandas.MultiIndex.from_tuples(current_index)
+        result.columns = multiindex
     return result
+
+
+def standardise_tuple_length(list_of_tuples):
+    max_length = max([len(item) for item in list_of_tuples])
+    standardised_tuples = [item + tuple([''] * (max_length - len(item))) for item in list_of_tuples]
+    return standardised_tuples
 
 
 if __name__ == '__main__':
@@ -39,4 +49,5 @@ if __name__ == '__main__':
         for line in d:
             result = decrease_dict_levels(json.loads(line))
 
-    print convert_json2multidf(json_file)
+    test = convert_json2multidf(json_file)
+    print test['opening_hours']
