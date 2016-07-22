@@ -3,6 +3,7 @@ import pandas
 
 
 def decrease_levels(nested_dict):
+    resulting_dict = {}
     
     list_of_levels = [[nested_dict.items()]]
 
@@ -19,12 +20,12 @@ def decrease_levels(nested_dict):
                     parent_keys.append(previous_parent_keys[subdict_counter] + (key,))
                     new_level.append(value.items())
                 else:
-                    print key
+                    resulting_dict[previous_parent_keys[subdict_counter] + (key,)] = value
             subdict_counter = subdict_counter + 1
         if new_level != list():
             list_of_levels.append(new_level)
         previous_parent_keys = parent_keys
-    return None
+    return resulting_dict
 
 
 if __name__ == '__main__':
@@ -35,3 +36,4 @@ if __name__ == '__main__':
         for line in d:
             result = decrease_levels(json.loads(line))
 
+    print result
