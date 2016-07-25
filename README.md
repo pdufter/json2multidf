@@ -1,13 +1,13 @@
 # json2multidf
-Small helper function which flattens nested json files and converts it to multindex pandas dataframes.
+Code snippet which flattens nested json files and converts it to multindex pandas dataframes.
 
 # Usage
 
 Download json2multidf.py and use as shown in the example.py.
 
 # Performance Comparison
-Many solutions to flatten a dictionary using recursion are available (e.g. http://codereview.stackexchange.com/questions/21033/flatten-dictionary-in-python-functional-style).
-A quick performance comparison, however, shows that the non-recursive formulation is faster (especially on larger and more nested json files).
+Most code snippets for flattening a dictionary are recursion based (e.g. http://codereview.stackexchange.com/questions/21033/flatten-dictionary-in-python-functional-style).
+While a non-recursive formulation is syntactically not as nice, it offers better performance in Python (especially on larger and more deeply nested json files).
 
 
 | [s]           | Fake dataset | Yelp dataset  |
