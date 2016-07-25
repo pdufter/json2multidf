@@ -1,3 +1,5 @@
 .DS_Store
 /myenv
 data/business.json
+json2multidf.pyc
+perf_comparison.pyc
