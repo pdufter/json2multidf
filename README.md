@@ -1,5 +1,5 @@
 # json2multidf
-Code snippet which flattens nested json files (and as such nested dictionarys). Offers functionality to directly convert json data to a multindex pandas dataframes, as well.
+Code snippet which flattens nested dictionarys. As such it offers the functionality to directly convert json data to a multindexed pandas dataframe.
 
 # Usage
 
