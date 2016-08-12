@@ -1,5 +1,6 @@
 import json
 import pandas
+import itertools
 
 
 def decreaseDictLevels(nested_dict):
@@ -43,9 +44,39 @@ def standardiseTupleLength(list_of_tuples):
     return standardised_tuples
 
 
+def convertListsToDummies(pandas_series):
+    # pivot and create dummys for list entries
+    tmp_sep = "_.-:-._"
+
+    unique_headers = list(set(
+        itertools.chain(
+            *list(pandas_series)
+            )
+        ))
+
+    all_dummies = pandas_series.apply(pandas.Series)
+    all_dummies = pandas.get_dummies(all_dummies, prefix_sep=tmp_sep)
+
+    # we might have some duplicated columns thus reduced them to a single column
+    reduced_dummies = pandas.DataFrame()
+    for entry in unique_headers:
+        sel_cols = [entry in column_header for column_header in all_dummies.columns]
+        reduced_dummies[entry] = all_dummies.ix[:, sel_cols].sum(axis=1).apply(bool)
+
+    return reduced_dummies
+
+
 if __name__ == '__main__':
     
     json_file = 'data/fake_data.json'
 
     example_dataframe = json2multidf(json_file)
+    print ('\n\nResulting multiindex dataframe:\n')
     print (example_dataframe)
+    
+    print ('\n\nExample for list conversion:\n')
+    print ('Before')
+    print (example_dataframe[('beer_menu', 'lager')])
+    print ('After')
+    print (convertListsToDummies(example_dataframe[('beer_menu', 'lager')]))
+
