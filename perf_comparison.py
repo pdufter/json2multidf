@@ -52,6 +52,7 @@ if __name__ == "__main__":
     # import my own function
     from json2multidf import *
     import timeit
+    
     print ("FAKE DATA SET")
     print ("Non-recursive:", min(timeit.repeat("[decreaseDictLevels(json.loads(line)) for line in open('data/fake_data.json', 'r')]", 
                                 setup="from json2multidf import decreaseDictLevels; import json; gc.enable()", 
@@ -65,6 +66,7 @@ if __name__ == "__main__":
                                setup="from speed_comparison import flatten_dict_2_tuple; import json; gc.enable()", 
                                number=100000, 
                                repeat=3)))
+    
     # performance comparison on the business data set available from the Yelp Challenge
     print ()
     print ("YELP BUSINESS DATA SET")
@@ -80,5 +82,6 @@ if __name__ == "__main__":
                                setup="from speed_comparison import flatten_dict_2_tuple; import json; gc.enable()", 
                                number=1, 
                                repeat=3)))
+ 
 
 

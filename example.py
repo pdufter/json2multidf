@@ -1,13 +1,9 @@
 from json2multidf import json2multidf
 
-json_file = 'data/business.json'
+json_file = 'data/fake_data.json'
 
-import time
-t = time.time()
 example_dataframe = json2multidf(json_file)
-result = time.time() - t
 
-print result
 print (example_dataframe)
 
 
