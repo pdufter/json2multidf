@@ -15,3 +15,7 @@ While a non-recursive formulation is syntactically not as nice, it offers better
 | Non-recursive | 3.1979       | 7.2744        |
 | Recursive 1   | 3.4391       | 8.8872        |
 | Recursive 2   | 3.5939       | 9.7790        |
+
+
+# Todo
+Add list conversion to the master dataframe
