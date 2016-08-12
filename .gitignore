@@ -1,4 +1,3 @@
-.gitignore
 .DS_Store
 /myenv
 data/business.json
